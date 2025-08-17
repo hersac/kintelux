@@ -3,10 +3,17 @@ import {
   IonApp,
   IonContent,
   IonFooter,
+  IonIcon,
   IonRouterOutlet,
-  IonTitle,
   IonToolbar,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import {
+  callOutline,
+  locationOutline,
+  mailOutline,
+  phonePortraitOutline,
+} from 'ionicons/icons';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 
@@ -14,8 +21,8 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   imports: [
+    IonIcon,
     IonToolbar,
-    IonTitle,
     IonApp,
     IonRouterOutlet,
     IonContent,
@@ -24,4 +31,13 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
     IonFooter,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor() {
+    addIcons({
+      callOutline,
+      mailOutline,
+      locationOutline,
+      phonePortraitOutline,
+    });
+  }
+}

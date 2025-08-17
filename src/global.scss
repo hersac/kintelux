@@ -180,3 +180,25 @@ ion-card {
 ion-button {
   --border-radius: var(--app-border-radius-md);
 }
+
+/* Estilos para el footer compacto */
+.footer-compact {
+  ion-toolbar {
+    --min-height: 50px;
+    --padding-top: 0;
+    --padding-bottom: 0;
+  }
+
+  .footer-sections {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--app-spacing-md);
+    font-size: 14px;
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
