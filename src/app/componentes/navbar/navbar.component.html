@@ -1,9 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button fill="clear">
+      @if(canGoBack){
+      <ion-button fill="clear" (click)="goBack()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
+      }
     </ion-buttons>
 
     @if(tituloSeccion()){

@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, inject, OnInit, Signal } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import {
   IonButton,
   IonButtons,
@@ -16,6 +18,7 @@ import {
   personCircleOutline,
   searchOutline,
 } from 'ionicons/icons';
+import { filter } from 'rxjs/operators';
 import { GlobalStore } from '../../store';
 
 @Component({
@@ -58,7 +61,11 @@ import { GlobalStore } from '../../store';
 })
 export class NavbarComponent implements OnInit {
   private useStore = inject(GlobalStore);
+  private location = inject(Location);
+  private router = inject(Router);
+
   tituloSeccion: Signal<string | null> = this.useStore?.tituloSeccion;
+  canGoBack: boolean = false;
 
   constructor() {
     addIcons({
@@ -70,5 +77,18 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Listen to router events to update canGoBack status
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // Check if we can go back in history
+        this.canGoBack =
+          this.router.getCurrentNavigation()?.previousNavigation !== null;
+      });
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }
