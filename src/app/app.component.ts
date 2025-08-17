@@ -1,11 +1,27 @@
 import { Component } from '@angular/core';
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import {
+  IonApp,
+  IonContent,
+  IonFooter,
+  IonRouterOutlet,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
+import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  imports: [IonApp, IonRouterOutlet],
+  imports: [
+    IonToolbar,
+    IonTitle,
+    IonApp,
+    IonRouterOutlet,
+    IonContent,
+    NavbarComponent,
+    SidebarComponent,
+    IonFooter,
+  ],
 })
-export class AppComponent {
-  constructor() {}
-}
+export class AppComponent {}

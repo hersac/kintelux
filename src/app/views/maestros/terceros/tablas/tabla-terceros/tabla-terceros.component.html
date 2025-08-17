@@ -1,0 +1,51 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Listado de Terceros</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-searchbar placeholder="Buscar tercero" animated></ion-searchbar>
+
+    <div class="table-container">
+      <table class="ion-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tipo Documento</th>
+            <th>Identificación</th>
+            <th>Tipo Persona</th>
+            <th>Nombre / Razón Social</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tercero of tercerosList">
+            <td>{{ tercero.id }}</td>
+            <td>{{ tercero.tipoDocumento }}</td>
+            <td>{{ tercero.identificacion }}</td>
+            <td>{{ tercero.tipoPersona }}</td>
+            <td>
+              {{
+                tercero.tipoPersona === 'Natural'
+                  ? tercero.nombre
+                  : tercero.razonSocial
+              }}
+            </td>
+            <td>
+              <ion-button
+                fill="clear"
+                size="small"
+                color="primary"
+                (click)="editarTercero(tercero)"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-card-content>
+</ion-card>

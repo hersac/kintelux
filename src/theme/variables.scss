@@ -1,2 +1,304 @@
-// For information on how to create your own theme, please see:
+// Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
+
+/** Ionic CSS Variables **/
+:root {
+  /** Colores primarios **/
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+
+  /** Colores secundarios **/
+  --ion-color-secondary: #3dc2ff;
+  --ion-color-secondary-rgb: 61, 194, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #36abe0;
+  --ion-color-secondary-tint: #50c8ff;
+
+  /** Colores terciarios **/
+  --ion-color-tertiary: #5260ff;
+  --ion-color-tertiary-rgb: 82, 96, 255;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #4854e0;
+  --ion-color-tertiary-tint: #6370ff;
+
+  /** Colores de éxito **/
+  --ion-color-success: #2dd36f;
+  --ion-color-success-rgb: 45, 211, 111;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #28ba62;
+  --ion-color-success-tint: #42d77d;
+
+  /** Colores de advertencia **/
+  --ion-color-warning: #ffc409;
+  --ion-color-warning-rgb: 255, 196, 9;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #e0ac08;
+  --ion-color-warning-tint: #ffca22;
+
+  /** Colores de peligro **/
+  --ion-color-danger: #eb445a;
+  --ion-color-danger-rgb: 235, 68, 90;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #cf3c4f;
+  --ion-color-danger-tint: #ed576b;
+
+  /** Colores oscuros **/
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  /** Colores medios **/
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+
+  /** Colores claros **/
+  --ion-color-light: #f4f5f8;
+  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d7d8da;
+  --ion-color-light-tint: #f5f6f9;
+
+  /** Colores personalizados para Kintelux **/
+  --ion-color-kintelux-primary: #007bff;
+  --ion-color-kintelux-primary-rgb: 0, 123, 255;
+  --ion-color-kintelux-primary-contrast: #ffffff;
+  --ion-color-kintelux-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-kintelux-primary-shade: #006fe0;
+  --ion-color-kintelux-primary-tint: #1a88ff;
+
+  --ion-color-kintelux-secondary: #6c757d;
+  --ion-color-kintelux-secondary-rgb: 108, 117, 125;
+  --ion-color-kintelux-secondary-contrast: #ffffff;
+  --ion-color-kintelux-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-kintelux-secondary-shade: #5f676e;
+  --ion-color-kintelux-secondary-tint: #7b838a;
+
+  --ion-color-kintelux-accent: #ff5722;
+  --ion-color-kintelux-accent-rgb: 255, 87, 34;
+  --ion-color-kintelux-accent-contrast: #ffffff;
+  --ion-color-kintelux-accent-contrast-rgb: 255, 255, 255;
+  --ion-color-kintelux-accent-shade: #e04d1e;
+  --ion-color-kintelux-accent-tint: #ff6938;
+
+  /** Colores de fondo **/
+  --ion-background-color: #ffffff;
+  --ion-background-color-rgb: 255, 255, 255;
+  --ion-text-color: #000000;
+  --ion-text-color-rgb: 0, 0, 0;
+
+  /** Colores para bordes **/
+  --ion-border-color: #d7d8da;
+  --ion-item-border-color: #dedede;
+
+  /** Colores para componentes **/
+  --ion-toolbar-background: #ffffff;
+  --ion-toolbar-color: var(--ion-color-primary);
+  --ion-tab-bar-background: #ffffff;
+  --ion-tab-bar-color: #92949c;
+  --ion-tab-bar-color-selected: var(--ion-color-primary);
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-color-primary: #428cff;
+    --ion-color-primary-rgb: 66, 140, 255;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #3a7be0;
+    --ion-color-primary-tint: #5598ff;
+
+    --ion-color-secondary: #50c8ff;
+    --ion-color-secondary-rgb: 80, 200, 255;
+    --ion-color-secondary-contrast: #ffffff;
+    --ion-color-secondary-contrast-rgb: 255, 255, 255;
+    --ion-color-secondary-shade: #46b0e0;
+    --ion-color-secondary-tint: #62ceff;
+
+    --ion-color-tertiary: #6a64ff;
+    --ion-color-tertiary-rgb: 106, 100, 255;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #5d58e0;
+    --ion-color-tertiary-tint: #7974ff;
+
+    --ion-color-success: #2fdf75;
+    --ion-color-success-rgb: 47, 223, 117;
+    --ion-color-success-contrast: #000000;
+    --ion-color-success-contrast-rgb: 0, 0, 0;
+    --ion-color-success-shade: #29c467;
+    --ion-color-success-tint: #44e283;
+
+    --ion-color-warning: #ffd534;
+    --ion-color-warning-rgb: 255, 213, 52;
+    --ion-color-warning-contrast: #000000;
+    --ion-color-warning-contrast-rgb: 0, 0, 0;
+    --ion-color-warning-shade: #e0bb2e;
+    --ion-color-warning-tint: #ffd948;
+
+    --ion-color-danger: #ff4961;
+    --ion-color-danger-rgb: 255, 73, 97;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-contrast-rgb: 255, 255, 255;
+    --ion-color-danger-shade: #e04055;
+    --ion-color-danger-tint: #ff5b71;
+
+    --ion-color-dark: #f4f5f8;
+    --ion-color-dark-rgb: 244, 245, 248;
+    --ion-color-dark-contrast: #000000;
+    --ion-color-dark-contrast-rgb: 0, 0, 0;
+    --ion-color-dark-shade: #d7d8da;
+    --ion-color-dark-tint: #f5f6f9;
+
+    --ion-color-medium: #989aa2;
+    --ion-color-medium-rgb: 152, 154, 162;
+    --ion-color-medium-contrast: #000000;
+    --ion-color-medium-contrast-rgb: 0, 0, 0;
+    --ion-color-medium-shade: #86888f;
+    --ion-color-medium-tint: #a2a4ab;
+
+    --ion-color-light: #222428;
+    --ion-color-light-rgb: 34, 36, 40;
+    --ion-color-light-contrast: #ffffff;
+    --ion-color-light-contrast-rgb: 255, 255, 255;
+    --ion-color-light-shade: #1e2023;
+    --ion-color-light-tint: #383a3e;
+
+    /** Colores personalizados para Kintelux en modo oscuro **/
+    --ion-color-kintelux-primary: #4d9fff;
+    --ion-color-kintelux-primary-rgb: 77, 159, 255;
+    --ion-color-kintelux-primary-contrast: #000000;
+    --ion-color-kintelux-primary-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-primary-shade: #448ce0;
+    --ion-color-kintelux-primary-tint: #5fa9ff;
+
+    --ion-color-kintelux-secondary: #8d959c;
+    --ion-color-kintelux-secondary-rgb: 141, 149, 156;
+    --ion-color-kintelux-secondary-contrast: #000000;
+    --ion-color-kintelux-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-secondary-shade: #7c8389;
+    --ion-color-kintelux-secondary-tint: #98a0a6;
+
+    --ion-color-kintelux-accent: #ff7a50;
+    --ion-color-kintelux-accent-rgb: 255, 122, 80;
+    --ion-color-kintelux-accent-contrast: #000000;
+    --ion-color-kintelux-accent-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-accent-shade: #e06b46;
+    --ion-color-kintelux-accent-tint: #ff8762;
+
+    /** Colores de fondo oscuros **/
+    --ion-background-color: #121212;
+    --ion-background-color-rgb: 18, 18, 18;
+    --ion-text-color: #ffffff;
+    --ion-text-color-rgb: 255, 255, 255;
+
+    /** Colores de componentes oscuros **/
+    --ion-border-color: #222222;
+    --ion-item-border-color: #333333;
+    --ion-toolbar-background: #1f1f1f;
+    --ion-toolbar-color: var(--ion-color-primary);
+    --ion-tab-bar-background: #1f1f1f;
+    --ion-tab-bar-color: #8c8c8c;
+    --ion-tab-bar-color-selected: var(--ion-color-primary);
+
+    /** Sombras y elevaciones **/
+    --ion-card-background: #1e1e1e;
+    --ion-item-background: #1a1a1a;
+    --ion-backdrop-color: #121212;
+    --ion-overlay-background-color: #202020;
+  }
+}
+
+/* Definición de clases para utilizar colores personalizados */
+.ion-color-kintelux-primary {
+  --ion-color-base: var(--ion-color-kintelux-primary);
+  --ion-color-base-rgb: var(--ion-color-kintelux-primary-rgb);
+  --ion-color-contrast: var(--ion-color-kintelux-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-kintelux-primary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-kintelux-primary-shade);
+  --ion-color-tint: var(--ion-color-kintelux-primary-tint);
+}
+
+.ion-color-kintelux-secondary {
+  --ion-color-base: var(--ion-color-kintelux-secondary);
+  --ion-color-base-rgb: var(--ion-color-kintelux-secondary-rgb);
+  --ion-color-contrast: var(--ion-color-kintelux-secondary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-kintelux-secondary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-kintelux-secondary-shade);
+  --ion-color-tint: var(--ion-color-kintelux-secondary-tint);
+}
+
+.ion-color-kintelux-accent {
+  --ion-color-base: var(--ion-color-kintelux-accent);
+  --ion-color-base-rgb: var(--ion-color-kintelux-accent-rgb);
+  --ion-color-contrast: var(--ion-color-kintelux-accent-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-kintelux-accent-contrast-rgb);
+  --ion-color-shade: var(--ion-color-kintelux-accent-shade);
+  --ion-color-tint: var(--ion-color-kintelux-accent-tint);
+}
+
+/* Variables adicionales para tipografía */
+:root {
+  --ion-font-family: 'Roboto', sans-serif;
+  --app-font-size-xs: 0.75rem; /* 12px */
+  --app-font-size-sm: 0.875rem; /* 14px */
+  --app-font-size-md: 1rem; /* 16px */
+  --app-font-size-lg: 1.25rem; /* 20px */
+  --app-font-size-xl: 1.5rem; /* 24px */
+  --app-font-size-xxl: 2rem; /* 32px */
+
+  --app-font-weight-light: 300;
+  --app-font-weight-regular: 400;
+  --app-font-weight-medium: 500;
+  --app-font-weight-bold: 700;
+
+  --app-line-height-tight: 1.2;
+  --app-line-height-normal: 1.5;
+  --app-line-height-loose: 1.8;
+}
+
+/* Variables para espaciado */
+:root {
+  --app-spacing-xs: 0.25rem; /* 4px */
+  --app-spacing-sm: 0.5rem; /* 8px */
+  --app-spacing-md: 1rem; /* 16px */
+  --app-spacing-lg: 1.5rem; /* 24px */
+  --app-spacing-xl: 2rem; /* 32px */
+  --app-spacing-xxl: 3rem; /* 48px */
+}
+
+/* Variables para bordes y radios */
+:root {
+  --app-border-radius-sm: 0.25rem; /* 4px */
+  --app-border-radius-md: 0.5rem; /* 8px */
+  --app-border-radius-lg: 1rem; /* 16px */
+  --app-border-width-thin: 1px;
+  --app-border-width-medium: 2px;
+  --app-border-width-thick: 3px;
+}
+
+/* Variables para sombras */
+:root {
+  --app-box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --app-box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --app-box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
