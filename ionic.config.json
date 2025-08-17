@@ -1,0 +1,7 @@
+{
+  "name": "kintelux",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
