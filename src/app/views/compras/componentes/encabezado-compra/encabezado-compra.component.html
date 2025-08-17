@@ -1,0 +1,135 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Encabezado del Documento</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="encabezadoForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">C.O. *</ion-label>
+              <ion-select
+                formControlName="centroOperacion"
+                placeholder="Seleccione centro"
+              >
+                @for(centro of centrosOperacion; track centro.id) {
+                <ion-select-option [value]="centro.id"
+                  >{{ centro.id }} - {{ centro.nombre }}</ion-select-option
+                >
+                }
+              </ion-select>
+            </ion-item>
+            @if(encabezadoForm.get('centroOperacion')?.touched &&
+            encabezadoForm.get('centroOperacion')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger); font-size: 0.8rem"
+            >
+              Centro de operación requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Tipo Docto. *</ion-label>
+              <ion-select
+                formControlName="tipoDocumento"
+                placeholder="Seleccione tipo"
+              >
+                @for(tipo of tiposDocumento; track tipo.id) {
+                <ion-select-option [value]="tipo.id"
+                  >{{ tipo.id }} - {{ tipo.nombre }}</ion-select-option
+                >
+                }
+              </ion-select>
+            </ion-item>
+            @if(encabezadoForm.get('tipoDocumento')?.touched &&
+            encabezadoForm.get('tipoDocumento')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger); font-size: 0.8rem"
+            >
+              Tipo de documento requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Número *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="numeroDocumento"
+                inputmode="numeric"
+              ></ion-input>
+            </ion-item>
+            @if(encabezadoForm.get('numeroDocumento')?.touched &&
+            encabezadoForm.get('numeroDocumento')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger); font-size: 0.8rem"
+            >
+              Número de documento requerido
+            </div>
+            } @if(encabezadoForm.get('numeroDocumento')?.touched &&
+            encabezadoForm.get('numeroDocumento')?.errors?.['pattern']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger); font-size: 0.8rem"
+            >
+              Solo se permiten números
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">ID Proveedor *</ion-label>
+              <ion-input type="text" formControlName="idProveedor"></ion-input>
+            </ion-item>
+            @if(encabezadoForm.get('idProveedor')?.touched &&
+            encabezadoForm.get('idProveedor')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger); font-size: 0.8rem"
+            >
+              ID de proveedor requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Nombre Proveedor</ion-label>
+              <ion-input
+                type="text"
+                formControlName="nombreProveedor"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="2">
+            <ion-button
+              expand="block"
+              color="primary"
+              (click)="buscarProveedor()"
+              [disabled]="!encabezadoForm.get('idProveedor')?.value"
+              class="ion-margin-top"
+            >
+              Buscar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Moneda</ion-label>
+              <ion-input type="text" formControlName="moneda"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card-content>
+</ion-card>

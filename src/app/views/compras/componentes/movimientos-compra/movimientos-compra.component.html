@@ -1,0 +1,111 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      <div
+        class="ion-justify-content-between"
+        style="display: flex; align-items: center"
+      >
+        <span>Movimientos - Entradas</span>
+        <ion-button color="primary" (click)="agregarProducto()">
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Agregar Producto
+        </ion-button>
+      </div>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <!-- Encabezados de la tabla -->
+      <ion-row class="ion-hide-sm-down">
+        <ion-col size="1.5"><strong>Código</strong></ion-col>
+        <ion-col size="3.5"><strong>Producto</strong></ion-col>
+        <ion-col size="1.5"><strong>Cantidad</strong></ion-col>
+        <ion-col size="2"><strong>Precio Unit.</strong></ion-col>
+        <ion-col size="2.5"><strong>Subtotal</strong></ion-col>
+        <ion-col size="1"><strong>Acciones</strong></ion-col>
+      </ion-row>
+
+      <!-- Filas de productos -->
+      @for(producto of productosCompra; track producto.id; let i = $index) {
+      <ion-row class="ion-align-items-center">
+        <!-- Vista para dispositivos grandes -->
+        <ion-col size="1.5" class="ion-hide-sm-down">{{
+          producto.codigo
+        }}</ion-col>
+        <ion-col size="3.5" class="ion-hide-sm-down">{{
+          producto.nombre
+        }}</ion-col>
+        <ion-col size="1.5" class="ion-hide-sm-down">{{
+          producto.cantidad
+        }}</ion-col>
+        <ion-col size="2" class="ion-hide-sm-down precio">{{
+          formatearMoneda(producto.precioUnitario)
+        }}</ion-col>
+        <ion-col size="2.5" class="ion-hide-sm-down precio">{{
+          formatearMoneda(producto.total)
+        }}</ion-col>
+        <ion-col size="1" class="ion-hide-sm-down">
+          <ion-button fill="clear" color="danger" (click)="eliminarProducto(i)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <!-- Vista para dispositivos pequeños -->
+        <ion-col size="12" class="ion-hide-md-up">
+          <div class="ion-padding-vertical">
+            <div>
+              <strong>{{ producto.codigo }}</strong> - {{ producto.nombre }}
+            </div>
+            <div>Cantidad: {{ producto.cantidad }}</div>
+            <div>
+              Precio:
+              <span class="precio">{{
+                formatearMoneda(producto.precioUnitario)
+              }}</span>
+            </div>
+            <div>
+              Subtotal:
+              <span class="precio">{{ formatearMoneda(producto.total) }}</span>
+            </div>
+            <ion-button
+              fill="clear"
+              color="danger"
+              (click)="eliminarProducto(i)"
+            >
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      } @empty {
+      <ion-row>
+        <ion-col size="12" class="ion-text-center ion-padding">
+          <ion-text color="medium">
+            No hay productos agregados. Utilice el botón "Agregar Producto" para
+            añadir elementos.
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      }
+
+      <!-- Fila de total -->
+      @if(productosCompra.length > 0) {
+      <ion-row class="total-row">
+        <ion-col size="8.5" class="ion-text-end ion-hide-sm-down">
+          <strong>TOTAL:</strong>
+        </ion-col>
+        <ion-col size="2.5" class="ion-hide-sm-down precio">
+          {{ formatearMoneda(totalCompra) }}
+        </ion-col>
+        <ion-col size="1" class="ion-hide-sm-down"></ion-col>
+
+        <!-- Total para dispositivos pequeños -->
+        <ion-col size="12" class="ion-hide-md-up ion-text-end">
+          <strong>TOTAL: </strong>
+          <span class="precio">{{ formatearMoneda(totalCompra) }}</span>
+        </ion-col>
+      </ion-row>
+      }
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

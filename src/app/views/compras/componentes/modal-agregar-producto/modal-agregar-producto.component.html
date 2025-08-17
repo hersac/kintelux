@@ -1,0 +1,128 @@
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Agregar Producto</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrar()">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <!-- Búsqueda de productos -->
+      <ion-searchbar
+        placeholder="Buscar producto..."
+        (ionInput)="buscarProductos($event)"
+        [value]="terminoBusqueda"
+        debounce="300"
+      >
+      </ion-searchbar>
+
+      <!-- Lista de productos filtrados -->
+      <ion-list>
+        @for(producto of productosFiltrados; track producto.id) {
+        <ion-item
+          button
+          (click)="seleccionarProducto(producto)"
+          class="producto-item"
+          [class.ion-color-light]="productoSeleccionado?.id === producto.id"
+        >
+          <ion-label>
+            <h2>
+              <strong>{{ producto.codigo }}</strong> - {{ producto.nombre }}
+            </h2>
+            <p class="precio">{{ formatearMoneda(producto.precioUnitario) }}</p>
+          </ion-label>
+        </ion-item>
+        } @empty {
+        <ion-item>
+          <ion-label class="ion-text-center"
+            >No se encontraron productos</ion-label
+          >
+        </ion-item>
+        }
+      </ion-list>
+
+      <!-- Formulario para cantidad y precio (solo visible si hay un producto seleccionado) -->
+      @if(productoSeleccionado) {
+      <form [formGroup]="productoForm" class="ion-padding-top">
+        <ion-item>
+          <ion-label position="stacked">Producto Seleccionado</ion-label>
+          <ion-input
+            readonly
+            [value]="
+              productoSeleccionado
+                ? productoSeleccionado.codigo +
+                  ' - ' +
+                  productoSeleccionado.nombre
+                : ''
+            "
+          >
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Cantidad *</ion-label>
+          <ion-input
+            type="number"
+            formControlName="cantidad"
+            min="1"
+            inputmode="numeric"
+          >
+          </ion-input>
+        </ion-item>
+        @if(productoForm.get('cantidad')?.touched &&
+        productoForm.get('cantidad')?.errors?.['required']) {
+        <div
+          class="ion-padding-start"
+          style="color: var(--ion-color-danger); font-size: 0.8rem"
+        >
+          Cantidad requerida
+        </div>
+        } @if(productoForm.get('cantidad')?.touched &&
+        productoForm.get('cantidad')?.errors?.['min']) {
+        <div
+          class="ion-padding-start"
+          style="color: var(--ion-color-danger); font-size: 0.8rem"
+        >
+          Cantidad debe ser mayor a 0
+        </div>
+        }
+
+        <ion-item>
+          <ion-label position="stacked">Precio Unitario *</ion-label>
+          <ion-input
+            type="text"
+            formControlName="precioUnitario"
+            (ionBlur)="formatearPrecio($event)"
+          >
+          </ion-input>
+        </ion-item>
+        @if(productoForm.get('precioUnitario')?.touched &&
+        productoForm.get('precioUnitario')?.errors?.['required']) {
+        <div
+          class="ion-padding-start"
+          style="color: var(--ion-color-danger); font-size: 0.8rem"
+        >
+          Precio unitario requerido
+        </div>
+        }
+
+        <div class="ion-padding-top">
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="agregarProducto()"
+            [disabled]="!productoForm.valid"
+          >
+            Agregar a la Compra
+          </ion-button>
+        </div>
+      </form>
+      }
+    </ion-content>
+  </ng-template>
+</ion-modal>
