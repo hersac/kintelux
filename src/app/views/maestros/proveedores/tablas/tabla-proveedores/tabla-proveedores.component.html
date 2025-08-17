@@ -1,0 +1,64 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Listado de Proveedores</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-searchbar placeholder="Buscar proveedor" animated></ion-searchbar>
+
+    <div class="table-container">
+      <table class="ion-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tipo Documento</th>
+            <th>Identificación</th>
+            <th>Tipo Persona</th>
+            <th>Nombre / Razón Social</th>
+            <th>Fecha Creación</th>
+            <th>Última Actualización</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proveedor of proveedoresList">
+            <td>{{ proveedor.id }}</td>
+            <td>{{ proveedor.tipoDocumento }}</td>
+            <td>{{ proveedor.identificacion }}</td>
+            <td>{{ proveedor.tipoPersona }}</td>
+            <td>
+              {{
+                proveedor.tipoPersona === 'Natural'
+                  ? proveedor.nombre
+                  : proveedor.razonSocial
+              }}
+            </td>
+            <td>{{ proveedor.fechaCreacion }}</td>
+            <td>{{ proveedor.fechaActualizacion }}</td>
+            <td>
+              <span
+                [style.color]="proveedor.estado === 'Activo' ? 'green' : 'red'"
+                [style.font-weight]="'bold'"
+              >
+                {{ proveedor.estado }}
+              </span>
+            </td>
+            <td>
+              <ion-button
+                fill="clear"
+                size="small"
+                color="primary"
+                (click)="editarProveedor(proveedor)"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-card-content>
+</ion-card>

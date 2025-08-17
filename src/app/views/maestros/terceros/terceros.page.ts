@@ -45,7 +45,6 @@ export class TercerosPage implements OnInit {
 
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
-    // Si se está mostrando el formulario, ocultamos la edición
     if (this.mostrarFormulario) {
       this.mostrarEdicion = false;
       this.terceroSeleccionado = null;

@@ -1,0 +1,226 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Editar Proveedor</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="proveedorForm" (ngSubmit)="guardarProveedor()">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Tipo de Documento *</ion-label>
+              <ion-select
+                formControlName="tipoDocumento"
+                interface="action-sheet"
+                id="tipoDocumentoSelect"
+                aria-label="Seleccione tipo de documento"
+              >
+                <ion-select-option
+                  *ngFor="let tipo of tiposDocumento"
+                  [value]="tipo.id"
+                >
+                  {{ tipo.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            @if(proveedorForm.get('tipoDocumento')?.touched &&
+            proveedorForm.get('tipoDocumento')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Tipo de documento es requerido
+            </div>
+            }
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Identificación *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="identificacion"
+                aria-label="Identificación"
+              ></ion-input>
+            </ion-item>
+            @if(proveedorForm.get('identificacion')?.touched &&
+            proveedorForm.get('identificacion')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Identificación es requerida
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Tipo de Persona *</ion-label>
+              <ion-select
+                formControlName="tipoPersona"
+                interface="action-sheet"
+                (ionChange)="onTipoPersonaChange($event)"
+                aria-label="Seleccione tipo de persona"
+              >
+                <ion-select-option
+                  *ngFor="let tipo of tiposPersona"
+                  [value]="tipo.id"
+                >
+                  {{ tipo.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Estado *</ion-label>
+              <ion-select
+                formControlName="estado"
+                interface="action-sheet"
+                aria-label="Seleccione estado"
+              >
+                <ion-select-option
+                  *ngFor="let estado of estados"
+                  [value]="estado.id"
+                >
+                  {{ estado.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        @if(tipoPersona === 'natural'){
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Primer Nombre *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="primerNombre"
+                aria-label="Primer nombre"
+              ></ion-input>
+            </ion-item>
+            @if(proveedorForm.get('primerNombre')?.touched &&
+            proveedorForm.get('primerNombre')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Primer nombre es requerido
+            </div>
+            }
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Segundo Nombre</ion-label>
+              <ion-input
+                type="text"
+                formControlName="segundoNombre"
+                aria-label="Segundo nombre"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Primer Apellido *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="primerApellido"
+                aria-label="Primer apellido"
+              ></ion-input>
+            </ion-item>
+            @if(proveedorForm.get('primerApellido')?.touched &&
+            proveedorForm.get('primerApellido')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Primer apellido es requerido
+            </div>
+            }
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Segundo Apellido</ion-label>
+              <ion-input
+                type="text"
+                formControlName="segundoApellido"
+                aria-label="Segundo apellido"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        } @else {
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Razón Social *</ion-label>
+              <ion-input
+                type="text"
+                formControlName="razonSocial"
+                aria-label="Razón social"
+              ></ion-input>
+            </ion-item>
+            @if(proveedorForm.get('razonSocial')?.touched &&
+            proveedorForm.get('razonSocial')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Razón social es requerida
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+        }
+
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Fecha de Creación</ion-label>
+              <ion-input
+                type="text"
+                formControlName="fechaCreacion"
+                readonly
+                aria-label="Fecha de creación"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Fecha de Actualización</ion-label>
+              <ion-input
+                type="text"
+                formControlName="fechaActualizacion"
+                readonly
+                aria-label="Fecha de actualización"
+              ></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" class="ion-text-end">
+            <ion-button color="medium" (click)="cancelarEdicion()">
+              Cancelar
+            </ion-button>
+            <ion-button type="submit" [disabled]="!proveedorForm.valid">
+              Guardar Cambios
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card-content>
+</ion-card>

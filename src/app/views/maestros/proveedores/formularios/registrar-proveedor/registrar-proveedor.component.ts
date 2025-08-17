@@ -21,11 +21,12 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
+  IonToggle,
 } from '@ionic/angular/standalone';
 
 @Component({
-  selector: 'app-registrar-tercero',
-  templateUrl: './registrar-tercero.component.html',
+  selector: 'app-registrar-proveedor',
+  templateUrl: './registrar-proveedor.component.html',
   styles: [''],
   standalone: true,
   imports: [
@@ -45,12 +46,13 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    IonToggle,
   ],
 })
-export class RegistrarTerceroComponent implements OnInit {
+export class RegistrarProveedorComponent implements OnInit {
   @Output() guardadoExitoso = new EventEmitter<void>();
 
-  terceroForm: FormGroup;
+  proveedorForm: FormGroup;
   tipoPersona: string = 'natural';
 
   tiposDocumento: any[] = [
@@ -65,8 +67,13 @@ export class RegistrarTerceroComponent implements OnInit {
     { id: 'juridica', nombre: 'Persona Jurídica' },
   ];
 
+  estados: any[] = [
+    { id: 'activo', nombre: 'Activo' },
+    { id: 'inactivo', nombre: 'Inactivo' },
+  ];
+
   constructor(private formBuilder: FormBuilder) {
-    this.terceroForm = this.formBuilder.group({
+    this.proveedorForm = this.formBuilder.group({
       tipoDocumento: ['', Validators.required],
       identificacion: ['', Validators.required],
       tipoPersona: ['natural', Validators.required],
@@ -75,6 +82,7 @@ export class RegistrarTerceroComponent implements OnInit {
       primerApellido: ['', Validators.required],
       segundoApellido: [''],
       razonSocial: [''],
+      estado: ['activo', Validators.required],
     });
   }
 
@@ -89,30 +97,42 @@ export class RegistrarTerceroComponent implements OnInit {
 
   configurarValidacionesTipoPersona(tipo: string) {
     if (tipo === 'natural') {
-      this.terceroForm.get('primerNombre')?.setValidators(Validators.required);
-      this.terceroForm
+      this.proveedorForm
+        .get('primerNombre')
+        ?.setValidators(Validators.required);
+      this.proveedorForm
         .get('primerApellido')
         ?.setValidators(Validators.required);
-      this.terceroForm.get('razonSocial')?.clearValidators();
+      this.proveedorForm.get('razonSocial')?.clearValidators();
     } else {
-      this.terceroForm.get('primerNombre')?.clearValidators();
-      this.terceroForm.get('primerApellido')?.clearValidators();
-      this.terceroForm.get('razonSocial')?.setValidators(Validators.required);
+      this.proveedorForm.get('primerNombre')?.clearValidators();
+      this.proveedorForm.get('primerApellido')?.clearValidators();
+      this.proveedorForm.get('razonSocial')?.setValidators(Validators.required);
     }
 
-    this.terceroForm.get('primerNombre')?.updateValueAndValidity();
-    this.terceroForm.get('primerApellido')?.updateValueAndValidity();
-    this.terceroForm.get('razonSocial')?.updateValueAndValidity();
+    this.proveedorForm.get('primerNombre')?.updateValueAndValidity();
+    this.proveedorForm.get('primerApellido')?.updateValueAndValidity();
+    this.proveedorForm.get('razonSocial')?.updateValueAndValidity();
   }
 
-  guardarTercero() {
-    if (this.terceroForm.valid) {
-      console.log('Datos del tercero:', this.terceroForm.value);
-      // Aquí iría la lógica para guardar el tercero
+  guardarProveedor() {
+    if (this.proveedorForm.valid) {
+      const fechaActual = new Date().toISOString().split('T')[0];
+
+      // Agregamos las fechas de creación y actualización
+      const proveedorData = {
+        ...this.proveedorForm.value,
+        fechaCreacion: fechaActual,
+        fechaActualizacion: fechaActual,
+      };
+
+      console.log('Datos del proveedor:', proveedorData);
+      // Aquí iría la lógica para guardar el proveedor
 
       // Resetear el formulario después de guardar
-      this.terceroForm.reset({
+      this.proveedorForm.reset({
         tipoPersona: 'natural', // Valor por defecto
+        estado: 'activo', // Valor por defecto
       });
       this.tipoPersona = 'natural';
       this.configurarValidacionesTipoPersona('natural');
@@ -121,7 +141,7 @@ export class RegistrarTerceroComponent implements OnInit {
       this.guardadoExitoso.emit();
     } else {
       console.log('Formulario inválido');
-      this.terceroForm.markAllAsTouched();
+      this.proveedorForm.markAllAsTouched();
 
       // Mostrar mensaje al usuario (podrías usar un toast o alerta)
       console.log('Por favor, complete todos los campos obligatorios');
