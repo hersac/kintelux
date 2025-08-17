@@ -1,13 +1,220 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>movimiento-inventario</ion-title>
+    <ion-title>Movimientos de Inventario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">movimiento-inventario</ion-title>
+      <ion-title size="large">Movimientos de Inventario</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Sección de botones para crear movimientos manuales -->
+  <div class="ion-padding-bottom">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-button
+            expand="block"
+            color="primary"
+            (click)="crearEntradaManual()"
+          >
+            <ion-icon name="arrow-up-circle-outline" slot="start"></ion-icon>
+            Crear Entrada Manual
+          </ion-button>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-button
+            expand="block"
+            color="tertiary"
+            (click)="crearSalidaManual()"
+          >
+            <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
+            Crear Salida Manual
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Tarjeta de filtros -->
+  <ion-card>
+    <ion-card-header class="filtros-header" (click)="toggleFiltros()">
+      <ion-card-title>
+        <div class="header-content">
+          <span>Filtrar Movimientos</span>
+          <ion-icon
+            [name]="filtrosExpandidos ? 'chevron-up-outline' : 'chevron-down-outline'"
+            class="filtros-toggle-icon"
+          ></ion-icon>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="filtrosExpandidos">
+      <ion-grid>
+        <!-- Fila para fechas -->
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Fecha Inicio</ion-label>
+              <ion-input type="date" [(ngModel)]="filtros.fechaInicio">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Fecha Fin</ion-label>
+              <ion-input type="date" [(ngModel)]="filtros.fechaFin">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila para tipo de movimiento y código de item -->
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Tipo de Movimiento</ion-label>
+              <ion-select [(ngModel)]="filtros.tipoMovimiento">
+                <ion-select-option value="todos">Todos</ion-select-option>
+                <ion-select-option value="entrada">Entrada</ion-select-option>
+                <ion-select-option value="salida">Salida</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Item</ion-label>
+              <ion-select [(ngModel)]="filtros.codigoItem">
+                <ion-select-option value="">Todos</ion-select-option>
+                @for (item of items; track item.codigo) {
+                <ion-select-option [value]="item.codigo"
+                  >{{ item.codigo }} - {{ item.nombre }}</ion-select-option
+                >
+                }
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Fila para proveedor y cliente -->
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Proveedor</ion-label>
+              <ion-select [(ngModel)]="filtros.proveedorId">
+                <ion-select-option value="">Todos</ion-select-option>
+                @for (proveedor of proveedores; track proveedor.id) {
+                <ion-select-option [value]="proveedor.id"
+                  >{{ proveedor.nombre }}</ion-select-option
+                >
+                }
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="stacked">Cliente</ion-label>
+              <ion-select [(ngModel)]="filtros.clienteId">
+                <ion-select-option value="">Todos</ion-select-option>
+                @for (cliente of clientes; track cliente.id) {
+                <ion-select-option [value]="cliente.id"
+                  >{{ cliente.nombre }}</ion-select-option
+                >
+                }
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Botones para aplicar filtros -->
+        <ion-row class="ion-padding-top">
+          <ion-col size="12" size-md="6">
+            <ion-button expand="block" (click)="aplicarFiltros()">
+              <ion-icon name="search-outline" slot="start"></ion-icon>
+              Aplicar Filtros
+            </ion-button>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-button
+              expand="block"
+              fill="outline"
+              (click)="limpiarFiltros()"
+            >
+              <ion-icon name="filter-outline" slot="start"></ion-icon>
+              Limpiar Filtros
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta con resultados de movimientos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Movimientos de Inventario</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      @if (movimientos.length > 0) {
+      <div class="table-container">
+        <table class="ion-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Documento</th>
+              <th>Item</th>
+              <th>Tercero</th>
+              <th>C.O.</th>
+              <th>Cantidad</th>
+              <th>Valor Unit.</th>
+              <th>Valor Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (movimiento of movimientos; track movimiento.id) {
+            <tr>
+              <td>{{ movimiento.fecha }}</td>
+              <td>
+                {{ movimiento.tipoDocumento }} {{ movimiento.numeroDocumento }}
+              </td>
+              <td>{{ movimiento.codigoItem }} - {{ movimiento.nombreItem }}</td>
+              <td>{{ movimiento.terceroNombre }}</td>
+              <td>{{ movimiento.centroOperacion }}</td>
+              <td>{{ movimiento.cantidad }}</td>
+              <td
+                class="text-end"
+                [ngClass]="{'precio-entrada': movimiento.tipoMovimiento === 'entrada', 'precio-salida': movimiento.tipoMovimiento === 'salida'}"
+              >
+                {{ formatearMoneda(movimiento.valorUnitario) }}
+              </td>
+              <td
+                class="text-end"
+                [ngClass]="{'precio-entrada': movimiento.tipoMovimiento === 'entrada', 'precio-salida': movimiento.tipoMovimiento === 'salida'}"
+              >
+                {{ formatearMoneda(movimiento.valorTotal) }}
+              </td>
+            </tr>
+            }
+            <!-- Fila de totales -->
+            <tr class="total-row">
+              <td colspan="7" class="text-end"><strong>TOTAL:</strong></td>
+              <td class="text-end">
+                {{ formatearMoneda(calcularTotalMovimientos()) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      } @else {
+      <div class="ion-text-center ion-padding">
+        <ion-text color="medium">
+          No se encontraron movimientos. Ajuste los filtros y vuelva a intentar.
+        </ion-text>
+      </div>
+      }
+    </ion-card-content>
+  </ion-card>
 </ion-content>
