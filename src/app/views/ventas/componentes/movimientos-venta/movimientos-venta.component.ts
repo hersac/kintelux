@@ -25,8 +25,8 @@ export interface ProductoMovimiento {
 }
 
 @Component({
-  selector: 'app-movimientos-compra',
-  templateUrl: './movimientos-compra.component.html',
+  selector: 'app-movimientos-venta',
+  templateUrl: './movimientos-venta.component.html',
   styles: [
     `
       .total-row {
@@ -54,11 +54,11 @@ export interface ProductoMovimiento {
     IonText,
   ],
 })
-export class MovimientosCompraComponent implements OnInit {
+export class MovimientosVentaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter<void>();
 
-  // Lista de productos en la compra
-  productosCompra: ProductoMovimiento[] = [];
+  // Lista de productos en la venta
+  productosVenta: ProductoMovimiento[] = [];
 
   constructor() {
     addIcons({ addCircleOutline, trashOutline });
@@ -74,7 +74,7 @@ export class MovimientosCompraComponent implements OnInit {
   // Agregar nuevo producto a la lista de movimientos
   addProductoToList(producto: ProductoMovimiento) {
     // Verificar si el producto ya existe en la lista
-    const productoExistente = this.productosCompra.find(
+    const productoExistente = this.productosVenta.find(
       p => p.id === producto.id,
     );
 
@@ -85,7 +85,7 @@ export class MovimientosCompraComponent implements OnInit {
         productoExistente.cantidad * productoExistente.precioUnitario;
     } else {
       // Si no existe, agregarlo a la lista
-      this.productosCompra.push({
+      this.productosVenta.push({
         ...producto,
         total: producto.cantidad * producto.precioUnitario,
       });
@@ -94,17 +94,17 @@ export class MovimientosCompraComponent implements OnInit {
 
   // Eliminar producto de la lista
   eliminarProducto(index: number) {
-    this.productosCompra.splice(index, 1);
+    this.productosVenta.splice(index, 1);
   }
 
   // Reiniciar la lista de productos
   reiniciarMovimientos() {
-    this.productosCompra = [];
+    this.productosVenta = [];
   }
 
-  // Calcular el total de la compra
-  get totalCompra(): number {
-    return this.productosCompra.reduce(
+  // Calcular el total de la venta
+  get totalVenta(): number {
+    return this.productosVenta.reduce(
       (total, producto) => total + producto.total,
       0,
     );
