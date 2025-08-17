@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuardGuard } from './auth/auth-guard-guard';
+import { loginGuard } from './auth/login-guard';
 
 export const routes: Routes = [
   {
@@ -6,9 +8,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./views/inicio/inicio.page').then(m => m.InicioPage),
     pathMatch: 'full',
+    canActivate: [authGuardGuard]
   },
   {
     path: 'maestros',
+    canActivate: [authGuardGuard],
     children: [
       {
         path: 'terceros',
@@ -49,14 +53,17 @@ export const routes: Routes = [
     path: 'compras',
     loadComponent: () =>
       import('./views/compras/compras.page').then(m => m.ComprasPage),
+    canActivate: [authGuardGuard]
   },
   {
     path: 'ventas',
     loadComponent: () =>
       import('./views/ventas/ventas.page').then(m => m.VentasPage),
+    canActivate: [authGuardGuard]
   },
   {
     path: 'inventario',
+    canActivate: [authGuardGuard],
     children: [
       {
         path: 'movimientos-inventario',
@@ -82,7 +89,14 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'clientes',
-    loadComponent: () => import('./views/maestros/clientes/clientes.page').then( m => m.ClientesPage)
+    path: 'login',
+    loadComponent: () =>
+      import('./views/autenticacion/login/login.page').then(m => m.LoginPage),
+    canActivate: [loginGuard]
   },
+  // Redirect any unknown paths to login
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 ];

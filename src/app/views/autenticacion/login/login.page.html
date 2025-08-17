@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Kintelux - Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Bienvenido a Kintelux</ion-card-title>
+        <ion-card-subtitle class="ion-text-center">Ingresa tus credenciales para continuar</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <ion-item lines="full">
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+          </ion-item>
+
+          <div class="ion-padding">
+            <ion-button expand="block" type="submit" [disabled]="!loginForm.form.valid">
+              Ingresar
+            </ion-button>
+          </div>
+
+          <div class="ion-text-center ion-padding-top">
+            <ion-text color="medium">
+              <p>¿Olvidaste tu contraseña?</p>
+            </ion-text>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

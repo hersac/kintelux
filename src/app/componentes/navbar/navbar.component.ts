@@ -13,6 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import {
   arrowBackOutline,
+  logOutOutline,
   menuOutline,
   notificationsOutline,
   personCircleOutline,
@@ -20,6 +21,7 @@ import {
 } from 'ionicons/icons';
 import { filter } from 'rxjs/operators';
 import { GlobalStore } from '../../store';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -63,6 +65,7 @@ export class NavbarComponent implements OnInit {
   private useStore = inject(GlobalStore);
   private location = inject(Location);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   tituloSeccion: Signal<string | null> = this.useStore?.tituloSeccion;
   canGoBack: boolean = false;
@@ -74,6 +77,7 @@ export class NavbarComponent implements OnInit {
       personCircleOutline,
       arrowBackOutline,
       menuOutline,
+      logOutOutline,
     });
   }
 
@@ -90,5 +94,10 @@ export class NavbarComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
