@@ -17,7 +17,11 @@
           <div slot="content">
             @for (subOption of option.subOpciones; track subOption.tituloOpcion)
             {
-            <ion-item class="submenu-item" [routerLink]="subOption.ruta">
+            <ion-item
+              class="submenu-item"
+              [routerLink]="subOption.deshabilitado ? null : subOption.ruta"
+              [disabled]="subOption.deshabilitado"
+            >
               <ion-icon name="{{ subOption.icono }}" slot="start"></ion-icon>
               <ion-label>{{ subOption.tituloOpcion }}</ion-label>
             </ion-item>

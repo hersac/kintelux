@@ -35,6 +35,7 @@ interface MenuOption {
   tituloOpcion: string;
   subOpciones?: MenuOption[];
   ruta?: string;
+  deshabilitado?: boolean;
 }
 
 @Component({
@@ -47,6 +48,10 @@ interface MenuOption {
       }
       .submenu-item {
         padding-left: 16px;
+      }
+      ion-item[disabled] {
+        opacity: 0.6;
+        cursor: not-allowed;
       }
     `,
   ],
@@ -142,13 +147,15 @@ export class SidebarComponent implements OnInit {
         },
         {
           icono: 'document-text-outline',
-          tituloOpcion: 'Reportes',
+          tituloOpcion: 'Reportes (En construcción)',
           ruta: '/inventario/reportes',
+          deshabilitado: true,
         },
         {
           icono: 'bar-chart-outline',
-          tituloOpcion: 'Estadísticas',
+          tituloOpcion: 'Estadísticas (En construcción)',
           ruta: '/inventario/estadisticas',
+          deshabilitado: true,
         },
       ],
     },
