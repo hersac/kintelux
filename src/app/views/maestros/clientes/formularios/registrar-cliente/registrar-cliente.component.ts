@@ -21,7 +21,6 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
-  IonToggle,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -46,7 +45,6 @@ import {
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonToggle,
   ],
 })
 export class RegistrarClienteComponent implements OnInit {

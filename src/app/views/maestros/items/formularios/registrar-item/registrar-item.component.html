@@ -1,0 +1,173 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Formulario de Items</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="itemForm" (ngSubmit)="guardarItem()">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Código *</ion-label>
+              <ion-input
+                formControlName="codigo"
+                type="text"
+                id="codigoInput"
+                aria-label="Código del item"
+                maxlength="10"
+              ></ion-input>
+            </ion-item>
+            @if(itemForm.get('codigo')?.touched &&
+            itemForm.get('codigo')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Código es requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Categoría *</ion-label>
+              <ion-select
+                formControlName="categoria"
+                interface="action-sheet"
+                id="categoriaSelect"
+                aria-label="Seleccione categoría"
+              >
+                <ion-select-option
+                  *ngFor="let cat of categorias"
+                  [value]="cat.id"
+                >
+                  {{ cat.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            @if(itemForm.get('categoria')?.touched &&
+            itemForm.get('categoria')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Categoría es requerida
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Descripción *</ion-label>
+              <ion-input
+                formControlName="descripcion"
+                type="text"
+                id="descripcionInput"
+                aria-label="Descripción del item"
+                maxlength="100"
+              ></ion-input>
+            </ion-item>
+            @if(itemForm.get('descripcion')?.touched &&
+            itemForm.get('descripcion')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Descripción es requerida
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Cantidad *</ion-label>
+              <ion-input
+                formControlName="cantidad"
+                type="number"
+                min="0"
+                id="cantidadInput"
+                aria-label="Cantidad del item"
+              ></ion-input>
+            </ion-item>
+            @if(itemForm.get('cantidad')?.touched &&
+            itemForm.get('cantidad')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Cantidad es requerida
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Precio Unitario (COP) *</ion-label>
+              <ion-input
+                formControlName="precioUnitario"
+                type="text"
+                id="precioUnitarioInput"
+                aria-label="Precio unitario del item"
+                (ionBlur)="formatearPrecio($event)"
+              ></ion-input>
+            </ion-item>
+            @if(itemForm.get('precioUnitario')?.touched &&
+            itemForm.get('precioUnitario')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Precio unitario es requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-item>
+              <ion-label position="floating">Stock *</ion-label>
+              <ion-input
+                formControlName="stock"
+                type="number"
+                min="0"
+                id="stockInput"
+                aria-label="Stock del item"
+              ></ion-input>
+            </ion-item>
+            @if(itemForm.get('stock')?.touched &&
+            itemForm.get('stock')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Stock es requerido
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label>Activo</ion-label>
+              <ion-toggle formControlName="estaActivo"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+              expand="block"
+              type="submit"
+              color="primary"
+              id="guardarButton"
+              aria-label="Guardar item"
+              >Guardar</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card-content>
+</ion-card>

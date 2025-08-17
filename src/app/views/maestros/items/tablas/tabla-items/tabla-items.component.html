@@ -1,0 +1,63 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Listado de Items</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-searchbar placeholder="Buscar item" animated></ion-searchbar>
+
+    <div class="table-container">
+      <table class="ion-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Categoría</th>
+            <th>Precio Unitario</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsList">
+            <td>{{ item.id }}</td>
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.descripcion }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.categoria }}</td>
+            <td>
+              {{
+                item.precioUnitario
+                  | currency : 'COP' : 'symbol-narrow' : '1.0-0'
+              }}
+            </td>
+            <td>{{ item.stock }}</td>
+            <td>
+              <span
+                [style.color]="item.estaActivo ? 'green' : 'red'"
+                [style.font-weight]="'bold'"
+              >
+                {{ item.estaActivo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td>
+              <ion-button
+                fill="clear"
+                size="small"
+                color="primary"
+                (click)="editarItem(item)"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-card-content>
+</ion-card>
