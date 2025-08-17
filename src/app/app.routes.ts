@@ -81,4 +81,8 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'clientes',
+    loadComponent: () => import('./views/maestros/clientes/clientes.page').then( m => m.ClientesPage)
+  },
 ];

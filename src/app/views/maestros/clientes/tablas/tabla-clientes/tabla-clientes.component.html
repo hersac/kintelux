@@ -1,0 +1,64 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Listado de Clientes</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-searchbar placeholder="Buscar cliente" animated></ion-searchbar>
+
+    <div class="table-container">
+      <table class="ion-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tipo Documento</th>
+            <th>Identificación</th>
+            <th>Tipo Persona</th>
+            <th>Nombre / Razón Social</th>
+            <th>Fecha Creación</th>
+            <th>Última Actualización</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientesList">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.tipoDocumento }}</td>
+            <td>{{ cliente.identificacion }}</td>
+            <td>{{ cliente.tipoPersona }}</td>
+            <td>
+              {{
+                cliente.tipoPersona === 'Natural'
+                  ? cliente.nombre
+                  : cliente.razonSocial
+              }}
+            </td>
+            <td>{{ cliente.fechaCreacion }}</td>
+            <td>{{ cliente.fechaActualizacion }}</td>
+            <td>
+              <span
+                [style.color]="cliente.estado === 'Activo' ? 'green' : 'red'"
+                [style.font-weight]="'bold'"
+              >
+                {{ cliente.estado }}
+              </span>
+            </td>
+            <td>
+              <ion-button
+                fill="clear"
+                size="small"
+                color="primary"
+                (click)="editarCliente(cliente)"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ion-card-content>
+</ion-card>

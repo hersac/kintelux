@@ -1,0 +1,189 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Formulario de Clientes</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="clienteForm" (ngSubmit)="guardarCliente()">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Tipo de Documento *</ion-label>
+              <ion-select
+                formControlName="tipoDocumento"
+                interface="action-sheet"
+                id="tipoDocumentoSelect"
+                aria-label="Seleccione tipo de documento"
+              >
+                <ion-select-option
+                  *ngFor="let tipo of tiposDocumento"
+                  [value]="tipo.id"
+                >
+                  {{ tipo.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            @if(clienteForm.get('tipoDocumento')?.touched &&
+            clienteForm.get('tipoDocumento')?.errors?.['required']){
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Campo requerido
+            </div>
+            }
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating"
+                >Número de Identificación *</ion-label
+              >
+              <ion-input
+                formControlName="identificacion"
+                type="text"
+                id="identificacionInput"
+                aria-label="Número de identificación"
+              ></ion-input>
+            </ion-item>
+            @if(clienteForm.get('identificacion')?.touched &&
+            clienteForm.get('identificacion')?.errors?.['required']) {
+            <div
+              class="ion-padding-start"
+              style="color: var(--ion-color-danger)"
+            >
+              Campo requerido
+            </div>
+            }
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Tipo de Persona *</ion-label>
+              <ion-select
+                formControlName="tipoPersona"
+                interface="action-sheet"
+                id="tipoPersonaSelect"
+                aria-label="Seleccione tipo de persona"
+                (ionChange)="onTipoPersonaChange($event)"
+              >
+                <ion-select-option
+                  *ngFor="let tipo of tiposPersona"
+                  [value]="tipo.id"
+                >
+                  {{ tipo.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="6">
+            <ion-item>
+              <ion-label position="floating">Estado *</ion-label>
+              <ion-select
+                formControlName="estado"
+                interface="action-sheet"
+                id="estadoSelect"
+                aria-label="Seleccione estado"
+              >
+                <ion-select-option
+                  *ngFor="let estado of estados"
+                  [value]="estado.id"
+                >
+                  {{ estado.nombre }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <!-- Campos para Persona Natural -->
+
+        @if (tipoPersona === 'natural') {
+        <ng-container>
+          <ion-row>
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="floating">Primer Nombre *</ion-label>
+                <ion-input
+                  formControlName="primerNombre"
+                  type="text"
+                  id="primerNombreInput"
+                  aria-label="Primer nombre"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="floating">Segundo Nombre</ion-label>
+                <ion-input
+                  formControlName="segundoNombre"
+                  type="text"
+                  id="segundoNombreInput"
+                  aria-label="Segundo nombre"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="floating">Primer Apellido *</ion-label>
+                <ion-input
+                  formControlName="primerApellido"
+                  type="text"
+                  id="primerApellidoInput"
+                  aria-label="Primer apellido"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="12" size-md="6">
+              <ion-item>
+                <ion-label position="floating">Segundo Apellido</ion-label>
+                <ion-input
+                  formControlName="segundoApellido"
+                  type="text"
+                  id="segundoApellidoInput"
+                  aria-label="Segundo apellido"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        }
+
+        <!-- Campos para Persona Jurídica -->
+        @if(tipoPersona === 'juridica') {
+        <ng-container>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Razón Social *</ion-label>
+                <ion-input
+                  formControlName="razonSocial"
+                  type="text"
+                  id="razonSocialInput"
+                  aria-label="Razón social"
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        }
+
+        <ion-row>
+          <ion-col>
+            <ion-button
+              expand="block"
+              type="submit"
+              color="primary"
+              id="guardarButton"
+              aria-label="Guardar cliente"
+              >Guardar</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card-content>
+</ion-card>
