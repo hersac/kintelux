@@ -5,7 +5,26 @@
 
     <div class="kintelux-card kintelux-m-md">
       <h2 class="kintelux-text-lg">Panel de control</h2>
-      <p>Contenido del panel de inicio</p>
+
+      <div class="charts-container">
+        <!-- Gráfica circular de compras por clientes -->
+        <div class="chart-box">
+          <h3 class="chart-title">Compras por Cliente</h3>
+          <canvas #clientesChart></canvas>
+        </div>
+
+        <!-- Gráfica de barras de ventas por ítem -->
+        <div class="chart-box">
+          <h3 class="chart-title">Mayores Ventas por Producto</h3>
+          <canvas #ventasChart></canvas>
+        </div>
+
+        <!-- Gráfica de líneas de balance de inventario -->
+        <div class="chart-box">
+          <h3 class="chart-title">Balance de Inventario</h3>
+          <canvas #inventarioChart></canvas>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>
