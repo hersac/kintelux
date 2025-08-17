@@ -1,0 +1,92 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Listado de Productos</ion-card-title>
+    <ion-searchbar
+      placeholder="Buscar productos..."
+      (ionInput)="buscarProductos($event)"
+      debounce="300"
+    ></ion-searchbar>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-grid>
+      <ion-row class="ion-hide-sm-down">
+        <ion-col size="1.5"><strong>Código</strong></ion-col>
+        <ion-col size="2"><strong>Nombre</strong></ion-col>
+        <ion-col size="2.5"><strong>Descripción</strong></ion-col>
+        <ion-col size="1.5"><strong>Unidad</strong></ion-col>
+        <ion-col size="2.5"><strong>Precio Base</strong></ion-col>
+        <ion-col size="2"><strong>Acciones</strong></ion-col>
+      </ion-row>
+
+      @for(producto of productosFiltrados; track producto.id) {
+      <ion-row
+        [class]="obtenerClaseProducto(producto)"
+        class="ion-align-items-center ion-padding-vertical"
+      >
+        <!-- Vista para dispositivos grandes -->
+        <ion-col size="1.5" class="ion-hide-sm-down">{{
+          producto.codigo
+        }}</ion-col>
+        <ion-col size="2" class="ion-hide-sm-down">{{
+          producto.nombre
+        }}</ion-col>
+        <ion-col size="2.5" class="ion-hide-sm-down">{{
+          producto.descripcion
+        }}</ion-col>
+        <ion-col size="1.5" class="ion-hide-sm-down">{{
+          producto.unidadMedida
+        }}</ion-col>
+        <ion-col size="2.5" class="ion-hide-sm-down precio">{{
+          formatearPrecio(producto.precioBase)
+        }}</ion-col>
+        <ion-col size="2" class="ion-hide-sm-down">
+          <ion-button
+            fill="clear"
+            color="primary"
+            (click)="seleccionarProducto(producto)"
+            aria-label="Ver detalles del producto"
+          >
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+
+        <!-- Vista para dispositivos pequeños -->
+        <ion-col size="12" class="ion-hide-md-up">
+          <ion-item lines="none">
+            <ion-label>
+              <h2>
+                <strong>{{ producto.codigo }}</strong
+                >: {{ producto.nombre }}
+              </h2>
+              <p>{{ producto.descripcion }}</p>
+              <p>Unidad: {{ producto.unidadMedida }}</p>
+              <p>
+                Precio Base:
+                <span class="precio">{{
+                  formatearPrecio(producto.precioBase)
+                }}</span>
+              </p>
+            </ion-label>
+            <ion-button
+              slot="end"
+              fill="clear"
+              color="primary"
+              (click)="seleccionarProducto(producto)"
+              aria-label="Ver detalles del producto"
+            >
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-button>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      } @empty {
+      <ion-row>
+        <ion-col size="12" class="ion-text-center ion-padding">
+          <p>No se encontraron productos.</p>
+        </ion-col>
+      </ion-row>
+      }
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
