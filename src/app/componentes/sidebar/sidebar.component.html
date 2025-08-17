@@ -1,0 +1,36 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Kintelux</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      @for (option of menuOptions; track option.tituloOpcion) { @if
+      (option.subOpciones) {
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header">
+            <ion-icon name="{{ option.icono }}" slot="start"></ion-icon>
+            <ion-label>{{ option.tituloOpcion }}</ion-label>
+          </ion-item>
+          <div slot="content">
+            @for (subOption of option.subOpciones; track subOption.tituloOpcion)
+            {
+            <ion-item class="submenu-item" [routerLink]="subOption.ruta">
+              <ion-icon name="{{ subOption.icono }}" slot="start"></ion-icon>
+              <ion-label>{{ subOption.tituloOpcion }}</ion-label>
+            </ion-item>
+            }
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+      } @else {
+      <ion-item class="menu-item" [routerLink]="option.ruta">
+        <ion-icon name="{{ option.icono }}" slot="start"></ion-icon>
+        <ion-label>{{ option.tituloOpcion }}</ion-label>
+      </ion-item>
+      } }
+    </ion-list>
+  </ion-content>
+</ion-menu>

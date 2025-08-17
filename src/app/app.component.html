@@ -1,3 +1,12 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <app-navbar />
+  <app-sidebar />
+  <ion-content id="main-content">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>Footer Content</ion-title>
+    </ion-toolbar>
+  </ion-footer>
 </ion-app>
