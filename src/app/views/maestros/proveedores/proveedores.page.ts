@@ -17,7 +17,13 @@ import { TablaProveedoresComponent } from './tablas/tabla-proveedores/tabla-prov
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.page.html',
-  styles: [],
+  styles: [
+    `
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     IonContent,

@@ -1,19 +1,21 @@
 <ion-app>
-  <app-navbar *ngIf="isAuthenticated" />
-  <app-sidebar *ngIf="isAuthenticated" />
+  @if(isAuthenticated){
+  <app-navbar />
+  <app-sidebar />
+  }
+
   <ion-content id="main-content">
-    <ion-router-outlet></ion-router-outlet>
+    <ion-router-outlet />
   </ion-content>
-  <ion-footer class="footer-compact" *ngIf="isAuthenticated">
+
+  @if(isAuthenticated){
+  <ion-footer class="footer-compact">
     <ion-toolbar>
       <div class="footer-sections">
         <div class="footer-column footer-column-left">
+          <small><ion-icon name="call-outline" /> +57 601 123 4567</small>
           <small
-            ><ion-icon name="call-outline"></ion-icon> +57 601 123 4567</small
-          >
-          <small
-            ><ion-icon name="phone-portrait-outline"></ion-icon> +57 315 987
-            6543</small
+            ><ion-icon name="phone-portrait-outline" /> +57 315 987 6543</small
           >
         </div>
 
@@ -22,16 +24,14 @@
         </div>
 
         <div class="footer-column footer-column-right">
+          <small><ion-icon name="mail-outline" /> contacto@kintelux.com</small>
           <small
-            ><ion-icon name="mail-outline"></ion-icon>
-            contacto@kintelux.com</small
-          >
-          <small
-            ><ion-icon name="location-outline"></ion-icon> Carrera 1 A bis # 64
-            09, Neiva</small
+            ><ion-icon name="location-outline" /> Carrera 1 A bis # 64 09,
+            Neiva</small
           >
         </div>
       </div>
     </ion-toolbar>
   </ion-footer>
+  }
 </ion-app>

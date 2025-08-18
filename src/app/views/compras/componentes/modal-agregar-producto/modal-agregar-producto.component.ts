@@ -48,6 +48,9 @@ interface Producto {
         color: var(--ion-color-primary);
         font-weight: bold;
       }
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
     `,
   ],
   standalone: true,

@@ -17,7 +17,13 @@ import { TablaItemsComponent } from './tablas/tabla-items/tabla-items.component'
 @Component({
   selector: 'app-items',
   templateUrl: './items.page.html',
-  styles: [],
+  styles: [
+    `
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     IonContent,

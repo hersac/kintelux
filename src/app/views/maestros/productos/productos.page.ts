@@ -17,7 +17,13 @@ import { TablaProductosComponent } from './tablas/tabla-productos/tabla-producto
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.page.html',
-  styles: [''],
+  styles: [
+    `
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     IonContent,

@@ -37,6 +37,9 @@ export interface ProductoMovimiento {
         color: var(--ion-color-primary);
         font-weight: bold;
       }
+      .icon-primary {
+        color: #ffffff;
+      }
     `,
   ],
   standalone: true,

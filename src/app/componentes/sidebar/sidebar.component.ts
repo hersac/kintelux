@@ -34,6 +34,7 @@ import {
   swapHorizontalOutline,
 } from 'ionicons/icons';
 import { AuthService } from '../../auth/auth.service';
+import { ThemeService } from '../../services/theme.service';
 
 interface MenuOption {
   icono: string;
@@ -71,6 +72,15 @@ interface MenuOption {
         --padding-start: 12px;
         --padding-end: 12px;
       }
+      :host-context(.dark) ion-icon {
+        color: white;
+      }
+      :host-context(.dark) ion-item {
+        --color: white;
+      }
+      :host-context(.dark) ion-label {
+        --color: white;
+      }
     `,
   ],
   standalone: true,
@@ -93,7 +103,11 @@ interface MenuOption {
 export class SidebarComponent implements OnInit {
   isDarkTheme: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private themeService: ThemeService,
+  ) {
     addIcons({
       briefcaseOutline,
       cubeOutline,
@@ -187,9 +201,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     // Check if dark theme was previously set
-    const prefersDark = localStorage.getItem('darkTheme') === 'true';
-    this.isDarkTheme = prefersDark;
-    this.applyTheme(prefersDark);
+    this.isDarkTheme = this.themeService.isDarkMode();
+
+    // Subscribe to theme changes
+    this.themeService.darkMode$.subscribe(isDark => {
+      this.isDarkTheme = isDark;
+    });
   }
 
   openConfiguration() {
@@ -200,12 +217,6 @@ export class SidebarComponent implements OnInit {
   }
 
   toggleDarkTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    this.applyTheme(this.isDarkTheme);
-    localStorage.setItem('darkTheme', this.isDarkTheme.toString());
-  }
-
-  private applyTheme(dark: boolean) {
-    document.body.classList.toggle('dark', dark);
+    this.themeService.toggleDarkMode();
   }
 }

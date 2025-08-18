@@ -53,6 +53,47 @@
   --kintelux-sidebar-width: 250px;
   --kintelux-sidebar-collapsed-width: 60px;
   --kintelux-content-padding: var(--app-spacing-md);
+
+  // Asegurar que el texto sea negro en modo claro
+  ion-content,
+  ion-item,
+  ion-label,
+  ion-button,
+  ion-title,
+  ion-card-title,
+  ion-card-subtitle {
+    --color: #5a5a5a;
+  }
+
+  ion-icon {
+    color: #5a5a5a;
+  }
+}
+
+// Añadir estilos específicos para texto en modo oscuro
+.dark {
+  // Asegurar que el texto sea blanco en modo oscuro
+  ion-content,
+  ion-item,
+  ion-label,
+  ion-button,
+  ion-title,
+  ion-card-title,
+  ion-card-subtitle {
+    --color: #ffffff;
+  }
+
+  // Asegurar que el texto en elementos específicos sea visible
+  ion-item {
+    --highlight-color-focused: var(--ion-color-primary);
+    --highlight-color-valid: var(--ion-color-success);
+    --highlight-color-invalid: var(--ion-color-danger);
+  }
+
+  // Mejorar la visibilidad de los iconos
+  ion-icon {
+    color: #ffffff;
+  }
 }
 
 // Clases de utilidad para la aplicación

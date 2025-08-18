@@ -18,6 +18,7 @@ import {
 import { AuthService } from './auth/auth.service';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,10 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 export class AppComponent implements OnInit {
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private themeService: ThemeService,
+  ) {
     addIcons({
       callOutline,
       mailOutline,
@@ -51,5 +55,9 @@ export class AppComponent implements OnInit {
     this.authService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isAuthenticated = isAuthenticated;
     });
+
+    // Initialize theme service (will apply saved theme from localStorage)
+    const prefersDark = localStorage.getItem('darkTheme') === 'true';
+    this.themeService.setDarkMode(prefersDark);
   }
 }

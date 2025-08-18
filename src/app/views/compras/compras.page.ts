@@ -19,7 +19,13 @@ import {
 @Component({
   selector: 'app-compras',
   templateUrl: './compras.page.html',
-  styles: [''],
+  styles: [
+    `
+      .texto-boton-guardar {
+        color: #ffffff;
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     CommonModule,

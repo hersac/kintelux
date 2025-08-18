@@ -17,7 +17,13 @@ import { TablaTercerosComponent } from './tablas/tabla-terceros/tabla-terceros.c
 @Component({
   selector: 'app-terceros',
   templateUrl: './terceros.page.html',
-  styles: [],
+  styles: [
+    `
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     IonContent,

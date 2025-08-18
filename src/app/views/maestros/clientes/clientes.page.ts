@@ -17,7 +17,13 @@ import { TablaClientesComponent } from './tablas/tabla-clientes/tabla-clientes.c
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.page.html',
-  styles: [],
+  styles: [
+    `
+      .icon-primary {
+        color: var(--ion-color-primary);
+      }
+    `,
+  ],
   standalone: true,
   imports: [
     IonContent,

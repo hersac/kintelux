@@ -21,6 +21,7 @@ import {
 } from 'ionicons/icons';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../../auth/auth.service';
+import { ThemeService } from '../../services/theme.service';
 import { GlobalStore } from '../../store';
 
 @Component({
@@ -33,6 +34,11 @@ import { GlobalStore } from '../../store';
         --color: var(--ion-color-kintelux-primary-contrast);
       }
 
+      :host-context(.dark) ion-toolbar {
+        --background: #1a1a1a;
+        --color: #ffffff;
+      }
+
       ion-button {
         --color: var(--ion-color-kintelux-primary-contrast);
       }
@@ -41,12 +47,25 @@ import { GlobalStore } from '../../store';
         color: var(--ion-color-kintelux-primary-contrast);
       }
 
+      :host-context(.dark) ion-icon {
+        color: #ffffff;
+      }
+
       ion-menu-button {
         color: var(--ion-color-kintelux-primary-contrast);
       }
 
+      :host-context(.dark) ion-menu-button {
+        color: #ffffff;
+      }
+
       ion-title {
         text-align: center;
+        color: var(--ion-color-kintelux-primary-contrast);
+      }
+
+      :host-context(.dark) ion-title {
+        color: #ffffff;
       }
     `,
   ],
@@ -66,9 +85,11 @@ export class NavbarComponent implements OnInit {
   private location = inject(Location);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private themeService = inject(ThemeService);
 
   tituloSeccion: Signal<string | null> = this.useStore?.tituloSeccion;
   canGoBack: boolean = false;
+  isDarkTheme: boolean = false;
 
   constructor() {
     addIcons({
@@ -90,6 +111,11 @@ export class NavbarComponent implements OnInit {
         this.canGoBack =
           this.router.getCurrentNavigation()?.previousNavigation !== null;
       });
+
+    // Subscribe to theme changes
+    this.themeService.darkMode$.subscribe(isDark => {
+      this.isDarkTheme = isDark;
+    });
   }
 
   goBack() {

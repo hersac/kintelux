@@ -21,7 +21,11 @@
             color="primary"
             (click)="crearEntradaManual()"
           >
-            <ion-icon name="arrow-up-circle-outline" slot="start"></ion-icon>
+            <ion-icon
+              name="arrow-up-circle-outline"
+              slot="start"
+              class="icon-primary"
+            ></ion-icon>
             Crear Entrada Manual
           </ion-button>
         </ion-col>
@@ -31,7 +35,11 @@
             color="tertiary"
             (click)="crearSalidaManual()"
           >
-            <ion-icon name="arrow-down-circle-outline" slot="start"></ion-icon>
+            <ion-icon
+              name="arrow-down-circle-outline"
+              slot="start"
+              class="icon-primary"
+            ></ion-icon>
             Crear Salida Manual
           </ion-button>
         </ion-col>
@@ -132,8 +140,16 @@
         <!-- Botones para aplicar filtros -->
         <ion-row class="ion-padding-top">
           <ion-col size="12" size-md="6">
-            <ion-button expand="block" (click)="aplicarFiltros()">
-              <ion-icon name="search-outline" slot="start"></ion-icon>
+            <ion-button
+              expand="block"
+              (click)="aplicarFiltros()"
+              class="texto-boton-primary"
+            >
+              <ion-icon
+                name="search-outline"
+                slot="start"
+                class="icon-primary"
+              ></ion-icon>
               Aplicar Filtros
             </ion-button>
           </ion-col>

@@ -184,22 +184,22 @@
     /** Colores personalizados para Kintelux en modo oscuro **/
     --ion-color-kintelux-primary: #4d9fff;
     --ion-color-kintelux-primary-rgb: 77, 159, 255;
-    --ion-color-kintelux-primary-contrast: #000000;
-    --ion-color-kintelux-primary-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-primary-contrast: #ffffff;
+    --ion-color-kintelux-primary-contrast-rgb: 255, 255, 255;
     --ion-color-kintelux-primary-shade: #448ce0;
     --ion-color-kintelux-primary-tint: #5fa9ff;
 
     --ion-color-kintelux-secondary: #8d959c;
     --ion-color-kintelux-secondary-rgb: 141, 149, 156;
-    --ion-color-kintelux-secondary-contrast: #000000;
-    --ion-color-kintelux-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-secondary-contrast: #ffffff;
+    --ion-color-kintelux-secondary-contrast-rgb: 255, 255, 255;
     --ion-color-kintelux-secondary-shade: #7c8389;
     --ion-color-kintelux-secondary-tint: #98a0a6;
 
     --ion-color-kintelux-accent: #ff7a50;
     --ion-color-kintelux-accent-rgb: 255, 122, 80;
-    --ion-color-kintelux-accent-contrast: #000000;
-    --ion-color-kintelux-accent-contrast-rgb: 0, 0, 0;
+    --ion-color-kintelux-accent-contrast: #ffffff;
+    --ion-color-kintelux-accent-contrast-rgb: 255, 255, 255;
     --ion-color-kintelux-accent-shade: #e06b46;
     --ion-color-kintelux-accent-tint: #ff8762;
 
@@ -371,15 +371,15 @@
   /** Colores personalizados para Kintelux en modo oscuro **/
   --ion-color-kintelux-primary: #4d9fff;
   --ion-color-kintelux-primary-rgb: 77, 159, 255;
-  --ion-color-kintelux-primary-contrast: #000000;
-  --ion-color-kintelux-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-kintelux-primary-contrast: #ffffff;
+  --ion-color-kintelux-primary-contrast-rgb: 255, 255, 255;
   --ion-color-kintelux-primary-shade: #448ce0;
   --ion-color-kintelux-primary-tint: #5fa9ff;
 
   --ion-color-kintelux-secondary: #8d959c;
   --ion-color-kintelux-secondary-rgb: 141, 149, 156;
-  --ion-color-kintelux-secondary-contrast: #000000;
-  --ion-color-kintelux-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-kintelux-secondary-contrast: #ffffff;
+  --ion-color-kintelux-secondary-contrast-rgb: 255, 255, 255;
   --ion-color-kintelux-secondary-shade: #7c8389;
   --ion-color-kintelux-secondary-tint: #98a0a6;
 
@@ -400,7 +400,7 @@
   --ion-border-color: #222222;
   --ion-item-border-color: #333333;
   --ion-toolbar-background: #1f1f1f;
-  --ion-toolbar-color: var(--ion-color-primary);
+  --ion-toolbar-color: #ffffff;
   --ion-tab-bar-background: #1f1f1f;
   --ion-tab-bar-color: #8c8c8c;
   --ion-tab-bar-color-selected: var(--ion-color-primary);
