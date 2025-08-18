@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   IonAccordion,
   IonAccordionGroup,
+  IonButton,
   IonContent,
   IonHeader,
   IonIcon,
@@ -23,12 +24,16 @@ import {
   cubeOutline,
   documentTextOutline,
   homeOutline,
+  logOutOutline,
+  moonOutline,
   peopleOutline,
   personOutline,
   pricetagOutline,
   settingsOutline,
+  sunnyOutline,
   swapHorizontalOutline,
 } from 'ionicons/icons';
+import { AuthService } from '../../auth/auth.service';
 
 interface MenuOption {
   icono: string;
@@ -53,6 +58,19 @@ interface MenuOption {
         opacity: 0.6;
         cursor: not-allowed;
       }
+      .bottom-options {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;
+        border-top: 1px solid var(--ion-color-light);
+      }
+      .bottom-option-btn {
+        --padding-start: 12px;
+        --padding-end: 12px;
+      }
     `,
   ],
   standalone: true,
@@ -69,10 +87,13 @@ interface MenuOption {
     IonAccordion,
     IonAccordionGroup,
     RouterLink,
+    IonButton,
   ],
 })
 export class SidebarComponent implements OnInit {
-  constructor() {
+  isDarkTheme: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) {
     addIcons({
       briefcaseOutline,
       cubeOutline,
@@ -87,6 +108,9 @@ export class SidebarComponent implements OnInit {
       swapHorizontalOutline,
       documentTextOutline,
       barChartOutline,
+      logOutOutline,
+      moonOutline,
+      sunnyOutline,
     });
   }
   menuOptions: MenuOption[] = [
@@ -161,5 +185,27 @@ export class SidebarComponent implements OnInit {
     },
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Check if dark theme was previously set
+    const prefersDark = localStorage.getItem('darkTheme') === 'true';
+    this.isDarkTheme = prefersDark;
+    this.applyTheme(prefersDark);
+  }
+
+  openConfiguration() {
+    // Navigate to configuration page or open configuration modal
+    // This can be replaced with actual implementation once you have a configuration page
+    console.log('Opening configuration');
+    // Example: this.router.navigate(['/configuration']);
+  }
+
+  toggleDarkTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    this.applyTheme(this.isDarkTheme);
+    localStorage.setItem('darkTheme', this.isDarkTheme.toString());
+  }
+
+  private applyTheme(dark: boolean) {
+    document.body.classList.toggle('dark', dark);
+  }
 }

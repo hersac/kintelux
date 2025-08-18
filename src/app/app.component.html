@@ -1,10 +1,10 @@
 <ion-app>
-  <app-navbar />
-  <app-sidebar />
+  <app-navbar *ngIf="isAuthenticated" />
+  <app-sidebar *ngIf="isAuthenticated" />
   <ion-content id="main-content">
     <ion-router-outlet></ion-router-outlet>
   </ion-content>
-  <ion-footer class="footer-compact">
+  <ion-footer class="footer-compact" *ngIf="isAuthenticated">
     <ion-toolbar>
       <div class="footer-sections">
         <div class="footer-column footer-column-left">

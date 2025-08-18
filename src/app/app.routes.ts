@@ -8,7 +8,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./views/inicio/inicio.page').then(m => m.InicioPage),
     pathMatch: 'full',
-    canActivate: [authGuardGuard]
+    canActivate: [authGuardGuard],
   },
   {
     path: 'maestros',
@@ -53,13 +53,13 @@ export const routes: Routes = [
     path: 'compras',
     loadComponent: () =>
       import('./views/compras/compras.page').then(m => m.ComprasPage),
-    canActivate: [authGuardGuard]
+    canActivate: [authGuardGuard],
   },
   {
     path: 'ventas',
     loadComponent: () =>
       import('./views/ventas/ventas.page').then(m => m.VentasPage),
-    canActivate: [authGuardGuard]
+    canActivate: [authGuardGuard],
   },
   {
     path: 'inventario',
@@ -92,11 +92,11 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./views/autenticacion/login/login.page').then(m => m.LoginPage),
-    canActivate: [loginGuard]
+    canActivate: [loginGuard],
   },
   // Redirect any unknown paths to login
   {
     path: '**',
-    redirectTo: 'login'
-  }
+    redirectTo: 'login',
+  },
 ];

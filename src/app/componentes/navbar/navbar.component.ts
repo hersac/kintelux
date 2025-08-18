@@ -20,8 +20,8 @@ import {
   searchOutline,
 } from 'ionicons/icons';
 import { filter } from 'rxjs/operators';
-import { GlobalStore } from '../../store';
 import { AuthService } from '../../auth/auth.service';
+import { GlobalStore } from '../../store';
 
 @Component({
   selector: 'app-navbar',

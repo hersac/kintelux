@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import {
   IonApp,
   IonContent,
@@ -14,6 +15,7 @@ import {
   mailOutline,
   phonePortraitOutline,
 } from 'ionicons/icons';
+import { AuthService } from './auth/auth.service';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { SidebarComponent } from './componentes/sidebar/sidebar.component';
 
@@ -29,15 +31,25 @@ import { SidebarComponent } from './componentes/sidebar/sidebar.component';
     NavbarComponent,
     SidebarComponent,
     IonFooter,
+    CommonModule,
   ],
 })
-export class AppComponent {
-  constructor() {
+export class AppComponent implements OnInit {
+  isAuthenticated: boolean = false;
+
+  constructor(private authService: AuthService) {
     addIcons({
       callOutline,
       mailOutline,
       locationOutline,
       phonePortraitOutline,
+    });
+  }
+
+  ngOnInit() {
+    // Subscribe to the authentication state changes
+    this.authService.isAuthenticated$.subscribe(isAuthenticated => {
+      this.isAuthenticated = isAuthenticated;
     });
   }
 }

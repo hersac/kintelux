@@ -8,24 +8,42 @@
   <div class="login-container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title class="ion-text-center">Bienvenido a Kintelux</ion-card-title>
-        <ion-card-subtitle class="ion-text-center">Ingresa tus credenciales para continuar</ion-card-subtitle>
+        <ion-card-title class="ion-text-center"
+          >Bienvenido a Kintelux</ion-card-title
+        >
+        <ion-card-subtitle class="ion-text-center"
+          >Ingresa tus credenciales para continuar</ion-card-subtitle
+        >
       </ion-card-header>
 
       <ion-card-content>
         <form (ngSubmit)="login()" #loginForm="ngForm">
           <ion-item lines="full">
             <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+            <ion-input
+              type="email"
+              [(ngModel)]="email"
+              name="email"
+              required
+            ></ion-input>
           </ion-item>
 
           <ion-item lines="full">
             <ion-label position="floating">Contraseña</ion-label>
-            <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+            <ion-input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              required
+            ></ion-input>
           </ion-item>
 
           <div class="ion-padding">
-            <ion-button expand="block" type="submit" [disabled]="!loginForm.form.valid">
+            <ion-button
+              expand="block"
+              type="submit"
+              [disabled]="!loginForm.form.valid"
+            >
               Ingresar
             </ion-button>
           </div>

@@ -36,5 +36,25 @@
       </ion-item>
       } }
     </ion-list>
+
+    <div class="bottom-options">
+      <ion-button
+        fill="clear"
+        class="bottom-option-btn"
+        (click)="openConfiguration()"
+      >
+        <ion-icon name="settings-outline" size="large"></ion-icon>
+      </ion-button>
+      <ion-button
+        fill="clear"
+        class="bottom-option-btn"
+        (click)="toggleDarkTheme()"
+      >
+        <ion-icon
+          [name]="isDarkTheme ? 'sunny-outline' : 'moon-outline'"
+          size="large"
+        ></ion-icon>
+      </ion-button>
+    </div>
   </ion-content>
 </ion-menu>

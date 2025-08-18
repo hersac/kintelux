@@ -1,23 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
+  AlertController,
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
+  IonInput,
   IonItem,
   IonLabel,
-  IonInput,
-  IonButton,
   IonText,
-  AlertController,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/angular/standalone';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
   ) {}
 
   ngOnInit() {}
@@ -61,7 +61,10 @@ export class LoginPage implements OnInit {
     if (this.authService.login(this.email, this.password)) {
       this.router.navigate(['/']);
     } else {
-      this.presentAlert('Error de inicio de sesión', 'Por favor verifica tus credenciales');
+      this.presentAlert(
+        'Error de inicio de sesión',
+        'Por favor verifica tus credenciales',
+      );
     }
   }
 
